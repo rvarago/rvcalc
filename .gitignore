@@ -1,3 +1,7 @@
+# Executables
+rvcalc
+rvcalctest
+
 # Prerequisites
 *.d
 
