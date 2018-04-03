@@ -1,3 +1,6 @@
+// test.cpp
+// @author rvarago
+
 #include <gtest/gtest.h>
 #include "calc.hpp"
 #include "calc_factory.hpp"

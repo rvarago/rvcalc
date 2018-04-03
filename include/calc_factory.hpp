@@ -1,3 +1,6 @@
+// calc_factory_hpp
+// @author rvarago
+
 #ifndef CALC_FACTORY_HPP_
 #define CALC_FACTORY_HPP_
 
@@ -6,6 +9,7 @@
 namespace rvcalc
 {
 
+// Helper to build calculators with pre-defined operations
 template<typename T>
 std::unique_ptr<rvcalc::Calculator<T>> makeCalc()
 {

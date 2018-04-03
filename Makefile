@@ -57,14 +57,15 @@ all: $(TARGET_FULLNAME)
 test: $(TEST_TARGET_FULLNAME)
 
 $(TARGET_FULLNAME): $(MAIN_FULLNAME) $(INCS)
-	$(ECHO) "Compiling and linking files..."
+	@$(ECHO) "Compiling and linking files..."
 	@$(MKDIR) $(MKDIRFLAGS) $(TARGET_DIR)	
 	@$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 	
 $(TEST_TARGET_FULLNAME): $(TEST_FULLNAME) $(INCS)
-	$(ECHO) "Compiling and linking test files..."
+	@$(ECHO) "Compiling and linking test files..."
 	@$(MKDIR) $(MKDIRFLAGS) $(TEST_TARGET_DIR)
 	@$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS_TEST) 
 
 clean: 
-	$(RMCMD) $(RMFLAGS) $(TARGET_DIR) $(TEST_TARGET_DIR)
+	@$(ECHO) "Cleaning build artifacts"
+	@$(RMCMD) $(RMFLAGS) $(TARGET_DIR) $(TEST_TARGET_DIR)

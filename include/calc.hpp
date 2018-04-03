@@ -1,3 +1,6 @@
+// calc.hpp
+// @author rvarago
+
 #ifndef CALC_HPP_
 #define CALC_HPP_
 
@@ -11,23 +14,24 @@ namespace rvcalc
 {
 
 template<typename T>
-using BinaryOperation = std::function<T(const T, const T)>;
+using BiFunction = std::function<T(const T, const T)>;
 
+// Map symbols to math operations
 template<typename T>
 class Calculator
 {
 public:
-	void registerOperation(const std::string &symbol, const BinaryOperation<T> &operation);
-	const BinaryOperation<T>& getOperation(const std::string &symbol) const; 
+	void registerOperation(const std::string &symbol, BiFunction<T> operation);
+	const BiFunction<T> getOperation(const std::string &symbol) const; 
 private:
-	bool isValid(const std::string &symbol) const;
-	std::unordered_map<std::string, BinaryOperation<T>> operations;
+	bool alreadyRegistered(const std::string &symbol) const;
+	std::unordered_map<std::string, BiFunction<T>> operations;
 };
 
 template<typename T>
-void Calculator<T>::registerOperation(const std::string &symbol, const BinaryOperation<T> &operation)
+void Calculator<T>::registerOperation(const std::string &symbol, BiFunction<T> operation)
 {
-	if(isValid(symbol))
+	if(alreadyRegistered(symbol))
 	{
 		throw std::invalid_argument("Operation symbol: " + symbol + " has already been defined");
 	}
@@ -35,9 +39,9 @@ void Calculator<T>::registerOperation(const std::string &symbol, const BinaryOpe
 }
 
 template<typename T>
-const BinaryOperation<T>& Calculator<T>::getOperation(const std::string &symbol) const
+const BiFunction<T> Calculator<T>::getOperation(const std::string &symbol) const
 {
-	if(!isValid(symbol))
+	if(!alreadyRegistered(symbol))
 	{
 		throw std::invalid_argument("Operation symbol: " + symbol + " has not been defined");
 	}
@@ -45,7 +49,7 @@ const BinaryOperation<T>& Calculator<T>::getOperation(const std::string &symbol)
 }
 
 template<typename T> 
-bool Calculator<T>::isValid(const std::string &symbol) const
+bool Calculator<T>::alreadyRegistered(const std::string &symbol) const
 {
 	return operations.find(symbol) != cend(operations);
 }

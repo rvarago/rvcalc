@@ -1,3 +1,6 @@
+// main.cpp
+// @author rvarago
+
 #include <iostream>
 #include "calc.hpp"
 #include "calc_factory.hpp"
