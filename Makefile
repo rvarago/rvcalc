@@ -1,58 +1,70 @@
 # Makefile
+# @author rvarago
 
-CC		= g++
-CFLAGS		= -Wall -Werror -ansi -pedantic -std=c++17 -c
-LDFLAGS		=
-LDFLAGS_TEST	= -lgtest -lpthread	
+# Compiler setup
 
-RMCMD		= rm
-RMFLAGS		= -rf
+CC			:= g++
+CFLAGS			:= -Wall -Werror -ansi -pedantic -std=c++17 -I./include
+LDFLAGS			:= 
+LDFLAGS_TEST		:= -lgtest -lpthread	
 
-ECHO		= echo
+################################################
+# Lib
 
-EXEC		= rvcalc
-OBJS		= calc_basic.o calc.o
-CSRC		= calc_basic.cpp calc.cpp
+INC_DIR			:= include
+INCS			:= $(wildcard $(INC_DIR)/*.hpp)
 
-CSRC_MAIN	= main.cpp
-OBJS_MAIN	= main.o
+################################################
+# Production
 
-EXEC_TEST	= rvcalctest
-OBJS_TEST	= test.o
-CSRC_TEST	= test.cpp
+TARGET_DIR		:= bin
+TARGET			:= rvcalc
+TARGET_FULLNAME		:= $(TARGET_DIR)/$(TARGET)
 
+MAIN_DIR		:= src
+MAIN			:= main.cpp
+MAIN_FULLNAME		:= $(MAIN_DIR)/$(MAIN)
+
+################################################
+# Test
+
+TEST_TARGET_DIR		:= test_bin
+TEST_TARGET		:= rvcalctest
+TEST_TARGET_FULLNAME	:= $(TEST_TARGET_DIR)/$(TEST_TARGET)
+
+TEST_DIR		:= test
+TEST			:= test.cpp
+TEST_FULLNAME		:= $(TEST_DIR)/$(TEST)
+
+################################################
+# Commands
+
+MKDIR			:= mkdir
+MKDIRFLAGS		:= -p
+ECHO			:= echo
+RMCMD			:= rm
+RMFLAGS			:= -rf
+
+################################################
+# Phony
 
 .PHONY: all test clean
 
-all: $(EXEC)
+################################################
+# Rules
 
-$(EXEC): $(OBJS_MAIN) $(OBJS) 
-	$(ECHO) "Linking files"
-	$(CC) -o $@ $^ $(LDFLAGS)
+all: $(TARGET_FULLNAME)
+test: $(TEST_TARGET_FULLNAME)
 
-main.o: main.cpp
-	$(ECHO) "Compiling files"
-	$(CC) -o $@ $< $(CFLAGS) 
-
-calc_basic.o: calc_basic.cpp
-	$(ECHO) "Compiling files"
-	$(CC) -o $@ $< $(CFLAGS)
-
-calc.o: calc.cpp
-	$(ECHO) "Compiling files"
-	$(CC) -o $@ $< $(CFLAGS) 
-
-test.o: test.cpp
-	$(ECHO) "Compiling files"
-	$(CC) -o $@ $< $(CFLAGS) 
-
-test:	$(EXEC_TEST)
-	$(ECHO) "Testing..."
-	./$<
-
-$(EXEC_TEST): $(OBJS_TEST) $(OBJS)
-	$(ECHO) "Linking test"
-	$(CC) -o $@ $^ $(LDFLAGS_TEST) 
+$(TARGET_FULLNAME): $(MAIN_FULLNAME) $(INCS)
+	$(ECHO) "Compiling and linking files..."
+	@$(MKDIR) $(MKDIRFLAGS) $(TARGET_DIR)	
+	@$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+	
+$(TEST_TARGET_FULLNAME): $(TEST_FULLNAME) $(INCS)
+	$(ECHO) "Compiling and linking test files..."
+	@$(MKDIR) $(MKDIRFLAGS) $(TEST_TARGET_DIR)
+	@$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS_TEST) 
 
 clean: 
-	$(RMCMD) $(RMFLAGS) $(EXEC) $(OBJS_MAIN) $(OBJS) $(EXEC_TEST) $(OBJS_TEST) 
+	$(RMCMD) $(RMFLAGS) $(TARGET_DIR) $(TEST_TARGET_DIR)

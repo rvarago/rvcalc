@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
-#include "calc.cpp"
-#include "calc_basic.cpp"
+#include "calc.hpp"
+#include "calc_factory.hpp"
 
 using namespace rvcalc;
 
 TEST(Calc, Add)
 {
-	auto calc = buildBasicCalculator<double>();
+	auto calc = makeCalc<double>();
 
 	ASSERT_EQ(0, operate(*calc, "+", 0, 0));
 	ASSERT_EQ(5, operate(*calc, "+", 2, 3));
@@ -15,7 +15,7 @@ TEST(Calc, Add)
 
 TEST(Calc, Sub)
 {
-	auto calc = buildBasicCalculator<double>();
+	auto calc = makeCalc<double>();
 
 	ASSERT_EQ(0, operate(*calc, "-", 0, 0));
 	ASSERT_EQ(-1, operate(*calc, "-", 2, 3));
@@ -24,7 +24,7 @@ TEST(Calc, Sub)
 
 TEST(Calc, Mul)
 {
-	auto calc = buildBasicCalculator<double>();
+	auto calc = makeCalc<double>();
 
 	ASSERT_EQ(0, operate(*calc, "*", 10, 0));
 	ASSERT_EQ(1, operate(*calc, "*", 1, 1));
@@ -33,7 +33,7 @@ TEST(Calc, Mul)
 
 TEST(Calc, Div)
 {
-	auto calc = buildBasicCalculator<double>();
+	auto calc = makeCalc<double>();
 
 	ASSERT_EQ(0, operate(*calc, "/", 0, 1));
 	ASSERT_EQ(6, operate(*calc, "/", 36, 6));

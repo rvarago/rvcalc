@@ -1,5 +1,5 @@
-#ifndef CALC_CPP_
-#define CALC_CPP_
+#ifndef CALC_HPP_
+#define CALC_HPP_
 
 #include <functional>
 #include <memory>
@@ -59,4 +59,4 @@ T operate(const Calculator<T> &calc, const std::string &symbol, const double fir
 
 }
 
-#endif // CALC_CPP_
+#endif // CALC_HPP_

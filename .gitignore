@@ -1,6 +1,6 @@
 # Executables
-rvcalc
-rvcalctest
+bin
+test_bin
 
 # Prerequisites
 *.d
