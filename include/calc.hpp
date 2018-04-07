@@ -10,6 +10,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "symbols.hpp"
+
 namespace rvcalc
 {
 
@@ -21,15 +23,15 @@ template<typename T>
 class Calculator
 {
 public:
-	void registerOperation(const std::string &symbol, BiFunction<T> operation);
+	void registerOperation(const std::string& symbol, BiFunction<T> operation);
 	const BiFunction<T> getOperation(const std::string &symbol) const; 
 private:
-	bool alreadyRegistered(const std::string &symbol) const;
+	bool alreadyRegistered(const std::string& symbol) const;
 	std::unordered_map<std::string, BiFunction<T>> operations;
 };
 
 template<typename T>
-void Calculator<T>::registerOperation(const std::string &symbol, BiFunction<T> operation)
+void Calculator<T>::registerOperation(const std::string& symbol, BiFunction<T> operation)
 {
 	if(alreadyRegistered(symbol))
 	{
@@ -39,7 +41,7 @@ void Calculator<T>::registerOperation(const std::string &symbol, BiFunction<T> o
 }
 
 template<typename T>
-const BiFunction<T> Calculator<T>::getOperation(const std::string &symbol) const
+const BiFunction<T> Calculator<T>::getOperation(const std::string& symbol) const
 {
 	if(!alreadyRegistered(symbol))
 	{
@@ -49,16 +51,16 @@ const BiFunction<T> Calculator<T>::getOperation(const std::string &symbol) const
 }
 
 template<typename T> 
-bool Calculator<T>::alreadyRegistered(const std::string &symbol) const
+bool Calculator<T>::alreadyRegistered(const std::string& symbol) const
 {
 	return operations.find(symbol) != cend(operations);
 }
 
 template<typename T>
-T operate(const Calculator<T> &calc, const std::string &symbol, const double firstOperand, const double secondOperand)
+T operate(const Calculator<T>& calc, const Symbols<T>& symbols)
 {
-	const auto operation = calc.getOperation(symbol);
-	return operation(firstOperand, secondOperand);
+	const auto operation = calc.getOperation(symbols.operatorSymbol());
+	return operation(symbols.firstOperand(), symbols.secondOperand());
 }
 
 }

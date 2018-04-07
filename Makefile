@@ -29,12 +29,7 @@ MAIN_FULLNAME		:= $(MAIN_DIR)/$(MAIN)
 # Test
 
 TEST_TARGET_DIR		:= test_bin
-TEST_TARGET		:= rvcalctest
-TEST_TARGET_FULLNAME	:= $(TEST_TARGET_DIR)/$(TEST_TARGET)
-
 TEST_DIR		:= test
-TEST			:= test.cpp
-TEST_FULLNAME		:= $(TEST_DIR)/$(TEST)
 
 ################################################
 # Commands
@@ -54,17 +49,23 @@ RMFLAGS			:= -rf
 # Rules
 
 all: $(TARGET_FULLNAME)
-test: $(TEST_TARGET_FULLNAME)
+
+test: $(TEST_TARGET_DIR) $(TEST_TARGET_DIR)/calc_test $(TEST_TARGET_DIR)/parser_test
+	@$(ECHO) "Compiling and linking test files..."
 
 $(TARGET_FULLNAME): $(MAIN_FULLNAME) $(INCS)
 	@$(ECHO) "Compiling and linking files..."
 	@$(MKDIR) $(MKDIRFLAGS) $(TARGET_DIR)	
-	@$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 	
-$(TEST_TARGET_FULLNAME): $(TEST_FULLNAME) $(INCS)
-	@$(ECHO) "Compiling and linking test files..."
+$(TEST_TARGET_DIR):
 	@$(MKDIR) $(MKDIRFLAGS) $(TEST_TARGET_DIR)
-	@$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS_TEST) 
+
+$(TEST_TARGET_DIR)/calc_test: $(TEST_DIR)/calc_test.cpp $(INCS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS_TEST) 
+
+$(TEST_TARGET_DIR)/parser_test: $(TEST_DIR)/parser_test.cpp $(INCS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS_TEST) 
 
 clean: 
 	@$(ECHO) "Cleaning build artifacts"
