@@ -1,4 +1,25 @@
+sudo: false
+
 language: cpp
 
+cache:
+  apt: true
+
+addons:
+  apt:
+    sources:
+    - boost-latest
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-6.3.0
+    - g++-6.3.0
+    - libboost1.62.-all-dev
+
+compiler:
+  - g++
+
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-6.3.0"; fi
+
 script:
-        - ./entry.sh
+  - ./entry.sh
