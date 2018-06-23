@@ -1,7 +1,7 @@
 // calc_test.cpp
 // @author rvarago
 
-#include <gtest/gtest.h>
+#include "googletest/googletest/include/gtest/gtest.h" //<gtest/gtest.h>
 #include "calc.hpp"
 #include "calc_factory.hpp"
 #include "symbols.hpp"
@@ -42,10 +42,4 @@ TEST(Calc, Div)
 	EXPECT_DOUBLE_EQ(0, operate(calc, Symbols<double>{"/", 0.0, 1.0}));
 	EXPECT_DOUBLE_EQ(6, operate(calc, Symbols<double>{"/", 36.0, 6.0}));
 	EXPECT_DOUBLE_EQ(20, operate(calc, Symbols<double>{"/", 100.0, 5.0}));
-}
-
-int main(int argc, char **argv) 
-{
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }

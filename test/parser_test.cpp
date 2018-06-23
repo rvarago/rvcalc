@@ -1,7 +1,7 @@
 // parser_test.cpp
 // @author rvarago
 
-#include <gtest/gtest.h>
+#include "googletest/googletest/include/gtest/gtest.h"
 #include <string>
 
 #include "parser.hpp"
@@ -34,11 +34,4 @@ TEST(Parser, ParseCustomDelim)
 	Symbols<int> expected{"+", 2, 2};
 
 	EXPECT_EQ(expected, parser.parse("2;+;2"));
-}
-
-
-int main(int argc, char **argv) 
-{
-	::testing::InitGoogleTest(&argc, argv);
-	return RUN_ALL_TESTS();
 }

@@ -1,6 +1,7 @@
 # Executables
 bin
 test_bin
+build 
 
 # Prerequisites
 *.d
