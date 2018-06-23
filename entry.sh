@@ -10,4 +10,10 @@ fi
 cd build
 cmake ..
 make
-./tests
+
+if [[ $1 == "test" ]]
+then
+	./tests
+else
+	./rvcalc
+fi
