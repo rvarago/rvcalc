@@ -8,19 +8,29 @@ To compile you need a C++ compiler supporting C++ 14 (tested with 6.3.0)
 
 Compile sources to objects and then to executable:
 
-mkdir build
-cd build
+```console
+mkdir build && cd build
 cmake ..
 make
+./rvcalc
+```
+Or:
 
-Then, to run: *./rvcalc*
-
+```console
+./entry.sh
+```
 ## Test
-The project has unit tests written with Google Test (need gtest):
+The project has unit tests written with Google Test:
 
-mkdir build
-cd build
+```console
+mkdir build && cd build
 cmake ..
 make
+./tests
+```
 
-Then, to run: *./tests*
+Or:
+
+```console
+./entry.sh test
+```
