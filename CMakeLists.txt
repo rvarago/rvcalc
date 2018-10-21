@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(rvcalc)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 add_library(core INTERFACE)
+
+target_compile_features(core INTERFACE cxx_std_14)
 
 target_include_directories(core INTERFACE include)
 
