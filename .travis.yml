@@ -6,10 +6,10 @@ compiler: gcc
 addons:
         apt:
                 sources:
-                - ubuntu-toolchain-r-test
+                        - ubuntu-toolchain-r-test
                 packages:
-                - g++-7
-                - libboost-all-dev
+                        - g++-7
+                        - libboost-all-dev
 
 before_script:
         - sudo ln -s /usr/bin/g++-7 /usr/local/bin/g++
@@ -20,4 +20,4 @@ before_script:
 script:
         - /usr/local/bin/cmake .
         - /usr/local/bin/cmake --build .
-        - ./tests
+        - ./test/rvcalc_tests

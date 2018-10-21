@@ -1,19 +1,37 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
-if [ ! -d build ]
-then
-	mkdir build
+function buildProject {
+    mkdir -p build
+    cd build
+
+    cmake ..
+    cmake --build .
+}
+
+function showUsage {
+    echo "usage: entry.sh <what>"
+    echo "<what>: app or test"
+}
+
+if [[ $# -ne 1 ]]; then
+    showUsage "$@"
+    exit 1
 fi
 
-cd build
-cmake ..
-make
+buildProject
 
-if [[ $1 == "test" ]]
-then
-	./tests
-else
-	./rvcalc
-fi
+case "$1" in
+    app)
+        ./app/rvcalc
+    ;;
+    test)
+        ./test/rvcalc_tests
+    ;;
+    *)
+        showUsage
+        exit 1
+esac
+
+exit 0
