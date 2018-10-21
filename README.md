@@ -5,7 +5,7 @@ A very basic, but customizable calculator.
 
 ## Usage
 
-**NOTE:** To compile you need a C++ compiler supporting C++ 14 (tested with 7.3.0).
+**NOTE:** To compile you need a C++ compiler supporting C++ 14 (tested with g++ 7.3.0).
 
 ### Compile
 
