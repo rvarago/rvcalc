@@ -3,6 +3,7 @@ bin
 test_bin
 build 
 
+cmake-build-debug
 # Prerequisites
 *.d
 
@@ -37,7 +38,8 @@ build
 *.app
 
 # IDE
-*.vscode/*
+.vscode/*
+.idea/*
 
 # Conflict
 *.orig

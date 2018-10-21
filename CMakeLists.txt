@@ -1,44 +1,20 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 3.7)
-PROJECT(rvcalc)
+cmake_minimum_required(VERSION 3.10)
+project(rvcalc)
 
-INCLUDE_DIRECTORIES(src)
-INCLUDE_DIRECTORIES(include)
-INCLUDE_DIRECTORIES(third-party)
+add_library(core INTERFACE)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+target_compile_features(core INTERFACE cxx_std_14)
 
-file(GLOB_RECURSE SRC src/*.cpp)
+target_include_directories(core INTERFACE include)
 
-list(REMOVE_ITEM SRC "src/main.cpp")
+add_executable(rvcalc src/main.cpp)
 
-file(GLOB_RECURSE INCLUDE include/*.hpp)
-
-ADD_LIBRARY(core ${INCLUDE} ${SRC})
-
-ADD_EXECUTABLE(rvcalc src/main.cpp)
-
-TARGET_LINK_LIBRARIES(rvcalc core)
+target_link_libraries(rvcalc PRIVATE core)
 
 enable_testing()
 
 add_subdirectory(third-party/googletest)
 
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR})
+add_executable(tests test/calc_test.cpp test/main_test.cpp test/parser_test.cpp)
 
-file(GLOB_RECURSE TEST test/*.cpp)
-
-ADD_EXECUTABLE(tests ${TEST})
-
-target_link_libraries(tests
-	        pthread
-		        gtest
-			        gtest_main
-				        core)
-
-IF(RELEASE)
-	SET(CMAKE_CXX_FLAGS "-Wall -Werror -o2 -std=c++11")
-ELSE()
-	SET(CMAKE_CXX_FLAGS "-g -Wall -Werror -std=c++11")
-ENDIF()
+target_link_libraries(tests	core gtest)
