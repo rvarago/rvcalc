@@ -1,32 +1,39 @@
 # rvcalc
-A very basic, but customizable calculator
+A very basic, but customizable calculator.
 
-author: rvarago (varago.rafael@gmail.com)
+**(WIP)**
 
-## Compilation
-To compile you need a C++ compiler supporting C++ 14 (tested with 6.3.0)
+## Usage
 
-Compile sources to objects and then to executable:
+**NOTE:** To compile you need a C++ compiler supporting C++ 14 (tested with 7.3.0).
+
+### Compile
 
 ```console
 mkdir build && cd build
 cmake ..
-make
+cmake --build . 
+```
+
+This will create a build folder where the generated artifacts will be put.
+
+### Run
+
+```console
 ./rvcalc
 ```
+
 Or:
 
 ```console
-./entry.sh
+./entry.sh app
 ```
-## Test
-The project has unit tests written with Google Test:
+
+### Test
+
 
 ```console
-mkdir build && cd build
-cmake ..
-make
-./tests
+./rvcalc_tests
 ```
 
 Or:
