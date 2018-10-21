@@ -3,6 +3,10 @@ A very basic, but customizable calculator.
 
 **(WIP)**
 
+## CI Status
+
+[![Build Status](https://travis-ci.org/rvarago/rvcalc.svg?branch=master)](https://travis-ci.org/rvarago/rvcalc)
+
 ## Usage
 
 **NOTE:** To compile you need a C++ compiler supporting C++ 14 (tested with g++ 7.3.0).
