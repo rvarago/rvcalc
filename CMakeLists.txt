@@ -1,24 +1,18 @@
 cmake_minimum_required(VERSION 3.10)
 project(rvcalc)
 
-include_directories(src)
-include_directories(include)
 include_directories(third-party)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB_RECURSE SRC src/*.cpp)
+add_library(core INTERFACE)
 
-list(REMOVE_ITEM SRC "src/main.cpp")
-
-file(GLOB_RECURSE INCLUDE include/*.hpp)
-
-add_library(core ${INCLUDE} ${SRC})
+target_include_directories(core INTERFACE include)
 
 add_executable(rvcalc src/main.cpp)
 
-target_link_libraries(rvcalc core)
+target_link_libraries(rvcalc PRIVATE core)
 
 enable_testing()
 
