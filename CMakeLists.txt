@@ -18,9 +18,3 @@ add_subdirectory(third-party/googletest)
 add_executable(tests test/calc_test.cpp test/main_test.cpp test/parser_test.cpp)
 
 target_link_libraries(tests	core gtest)
-
-IF(RELEASE)
-	set(CMAKE_CXX_FLAGS "-Wall -Werror -o2 -std=c++11")
-ELSE()
-	set(CMAKE_CXX_FLAGS "-g -Wall -Werror -std=c++11")
-ENDIF()
