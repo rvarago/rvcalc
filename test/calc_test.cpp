@@ -1,7 +1,7 @@
 // calc_test.cpp
 // @author rvarago
 
-#include "googletest/googletest/include/gtest/gtest.h" //<gtest/gtest.h>
+#include "gtest/gtest.h" //<gtest/gtest.h>
 #include "calc.hpp"
 #include "calc_factory.hpp"
 #include "symbols.hpp"

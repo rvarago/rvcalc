@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(rvcalc)
 
-include_directories(third-party)
-
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -18,18 +16,9 @@ enable_testing()
 
 add_subdirectory(third-party/googletest)
 
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR})
+add_executable(tests test/calc_test.cpp test/main_test.cpp test/parser_test.cpp)
 
-file(GLOB_RECURSE TEST test/*.cpp)
-
-add_executable(tests ${TEST})
-
-target_link_libraries(tests
-	        pthread
-		        gtest
-			        gtest_main
-				        core)
+target_link_libraries(tests	core gtest)
 
 IF(RELEASE)
 	set(CMAKE_CXX_FLAGS "-Wall -Werror -o2 -std=c++11")
