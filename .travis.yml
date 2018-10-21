@@ -9,7 +9,7 @@ addons:
                         - ubuntu-toolchain-r-test
                 packages:
                         - g++-7
-                        - libboost-all-dev
+                        - libboost-dev
 
 before_script:
         - sudo ln -s /usr/bin/g++-7 /usr/local/bin/g++
